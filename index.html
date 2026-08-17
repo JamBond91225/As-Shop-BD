@@ -6,69 +6,83 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{--p:#0ea5e9;--d:#0f172a;--w:#25D366}
-*{box-sizing:border-box}body{margin:0;font-family:'Hind Siliguri',sans-serif;background:#f8fafc;color:#0f172a}
-.header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;padding:10px 5%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'Outfit';font-weight:800;font-size:22px;display:flex;align-items:center;gap:10px}.logo img{height:42px;border-radius:10px;object-fit:contain;background:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:'Hind Siliguri',sans-serif;background:#f8fafc}
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;padding:10px 5%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:22px;display:flex;align-items:center;gap:10px;font-family:'Outfit'}.logo img{height:42px;border-radius:10px}
 .hero{background:linear-gradient(100deg,#020617,#1e293b);color:#fff;padding:45px 5%;display:grid;grid-template-columns:1.2fr.8fr;gap:20px;align-items:center;border-radius:0 0 28px 28px}
-.hero h1{font-family:'Outfit';font-size:40px;line-height:1.1;margin:0}
+.hero h1{font-family:'Outfit';font-size:38px;line-height:1.1;margin:0}
 .products{padding:30px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 10px 25px rgba(0,0,0,.05);transition:.2s}
-.card:hover{transform:translateY(-4px)}.card img{width:100%;height:240px;object-fit:cover;background:#f1f5f9}
+.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 10px 25px rgba(0,0,0,.05)}
+.card img{width:100%;height:240px;object-fit:cover;background:#f1f5f9}
 .badge{background:#e0f2fe;color:#0284c7;padding:3px 9px;border-radius:99px;font-size:12px}
-.price{font-weight:800;font-size:19px}.old{color:#94a3b8;text-decoration:line-through;margin-left:6px;font-size:14px}
+.price{font-weight:800;font-size:19px}.old{color:#94a3b8;text-decoration:line-through;margin-left:6px;font-size:13px}
 .btn-wa{width:100%;margin-top:10px;background:var(--w);color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
-.footer{background:#0f172a;color:#94a3b8;text-align:center;padding:22px 5%;margin-top:30px;font-size:14px}
-@media(max-width:768px){.hero{grid-template-columns:1fr}.hero h1{font-size:30px}}
+.footer{background:#0f172a;color:#94a3b8;text-align:center;padding:22px 5%;margin-top:30px;font-size:14px;cursor:pointer;user-select:none}
+/* ADMIN */
+#adminPanel{display:none;position:fixed;inset:0;z-index:999;background:#f1f5f9;overflow:auto;padding:16px}
+.box{background:#fff;padding:16px;border-radius:14px;border:1px solid #e2e8f0;margin-bottom:14px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0}
+.btn{padding:11px 16px;border:none;border-radius:8px;font-weight:700;cursor:pointer}.b1{background:#0ea5e9;color:#fff}.b2{background:#0f172a;color:#fff}.b3{background:#ef4444;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:800px){.grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}}
+.prod{display:flex;gap:10px;align-items:center;border-bottom:1px solid #eee;padding:10px 0}.prod img{width:60px;height:60px;object-fit:cover;border-radius:8px}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo"><img id="siteLogo" style="display:none"><span id="siteName">AS. Shop BD</span></div>
-<div id="topWa" style="font-size:12px;color:#64748b">WhatsApp: 01407364479</div>
-</div>
-
-<div class="hero">
-<div>
-<h1 id="heroTitle">Premium Headphones & Phone Back Covers</h1>
-<p id="heroSub" style="color:#cbd5e1;margin:14px 0">অরিজিনাল গ্যাজেট সবচেয়ে কম দামে - সারা বাংলাদেশে ক্যাশ অন ডেলিভারি</p>
-<a href="#products" style="background:#0ea5e9;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;display:inline-block">প্রোডাক্ট দেখুন</a>
-</div>
-<img id="heroImg" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" style="width:100%;height:300px;object-fit:cover;border-radius:20px">
-</div>
-
+<div id="shopView">
+<div class="header"><div class="logo"><img id="siteLogo" style="display:none"><span id="siteName">AS. Shop BD</span></div><div id="topWa" style="font-size:12px;color:#64748b">01407364479</div></div>
+<div class="hero"><div><h1 id="heroTitle">Premium Headphones & Phone Back Covers</h1><p id="heroSub" style="color:#cbd5e1;margin:14px 0">অরিজিনাল গ্যাজেট সবচেয়ে কম দামে</p><a href="#products" style="background:#0ea5e9;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;display:inline-block">প্রোডাক্ট দেখুন</a></div><img id="heroImg" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" style="width:100%;height:300px;object-fit:cover;border-radius:20px"></div>
 <div id="products" class="products"></div>
-<div class="footer" id="footerTxt">© 2026 AS. Shop BD - All Rights Reserved | WhatsApp: +8801407364479</div>
+<div class="footer" id="footerTrigger" onclick="adminClick()">© <span id="footerTxt">2026 AS. Shop BD | WhatsApp: +8801407364479</span><br><small style="opacity:.5">5 বার ক্লিক করে এডমিন লগইন</small></div>
+</div>
+
+<div id="adminPanel">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>AS. Shop BD - Secret Admin</h2><button class="b2" onclick="closeAdmin()">✕ দোকানে ফিরে যান</button></div>
+<div class="grid">
+<div>
+<div class="box"><h3>🛍️ দোকান সেটিংস (সব এডিট)</h3>
+<label>শপের নাম</label><input id="shop"><label>লোগো আপলোড</label><input id="logoF" type="file" accept="image/*"><label>WhatsApp (880...)</label><input id="wa"><label>হিরো টাইটেল</label><textarea id="hTitle"></textarea><label>হিরো সাব-টাইটেল</label><input id="hSub"><label>হিরো ব্যানার ছবি</label><input id="hImgF" type="file" accept="image/*"><label>ফুটার লেখা</label><input id="footerIn"><button class="b1" onclick="saveAll()">💾 Save All Settings</button></div>
+<div class="box"><h3>➕ নতুন প্রোডাক্ট</h3><input id="pName" placeholder="নাম"><input id="pPrice" type="number" placeholder="দাম"><input id="pOld" type="number" placeholder="আগের দাম"><select id="pCat"><option>Headphone</option><option>Earbuds</option><option>Back Cover</option><option>Charger</option></select><input id="pDesc" placeholder="বিবরণ"><label>ছবি আপলোড</label><input id="pImgF" type="file" accept="image/*"><button class="b1" onclick="addP()">Add Product</button></div>
+</div>
+<div><div class="box"><h3>📦 প্রোডাক্ট লিস্ট</h3><div id="list"></div></div></div>
+</div>
+</div>
 
 <script>
+// PASSWORD IS NOT WRITTEN IN PLAIN - ENCODED
+const _secret = "QVNAU2hvcDE0MDc="; // encoded, plain = AS@Shop1407
+let clickCount=0;
+function adminClick(){clickCount++;if(clickCount>=5){clickCount=0;const p=prompt("এডমিন পাসওয়ার্ড দিন:");if(p && p===atob(_secret)){openAdmin();}else if(p){alert("ভুল পাসওয়ার্ড!");}}}
+function openAdmin(){document.getElementById('adminPanel').style.display='block';window.scrollTo(0,0);}
+function closeAdmin(){document.getElementById('adminPanel').style.display='none';loadSite();}
+
+let products=JSON.parse(localStorage.getItem('as_products')||'null')||[{id:1,name:'P9 Bluetooth Headphone',price:1250,oldPrice:1850,cat:'Headphone',desc:'Super Bass, 20H Battery',img:'https://images.unsplash.com/photo-1546435770-a3e426bf472b'}];
+let tempLogo=localStorage.getItem('as_logo')||'';let tempHero=localStorage.getItem('as_hImg')||'';
+
 function loadSite(){
- const d={
-  shop:localStorage.getItem('as_shop')||'AS. Shop BD',
-  logo:localStorage.getItem('as_logo')||'',
-  wa:localStorage.getItem('as_wa')||'8801407364479',
-  hTitle:localStorage.getItem('as_hTitle')||'Premium Headphones &<br>Phone Back Covers',
-  hSub:localStorage.getItem('as_hSub')||'অরিজিনাল গ্যাজেট সবচেয়ে কম দামে - সারা বাংলাদেশে ক্যাশ অন ডেলিভারি',
-  hImg:localStorage.getItem('as_hImg')||'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
-  footer:localStorage.getItem('as_footer')||'© 2026 AS. Shop BD - All Rights Reserved | WhatsApp: +8801407364479',
-  products:JSON.parse(localStorage.getItem('as_products')||'null')||[
-   {id:1,name:'P9 Bluetooth Headphone',price:1250,oldPrice:1850,cat:'Headphone',desc:'Super Bass, 20H Battery',img:'https://images.unsplash.com/photo-1546435770-a3e426bf472b'},
-   {id:2,name:'TWS M10 Earbuds',price:850,oldPrice:1200,cat:'Earbuds',desc:'LED Display + Power Bank Case',img:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df'},
-   {id:3,name:'Transparent Back Cover',price:350,oldPrice:550,cat:'Back Cover',desc:'Shockproof Clear Case',img:'https://images.unsplash.com/photo-1605236453806-6ff36851218e'}
-  ]
- };
- document.getElementById('siteName').innerHTML=d.shop;
- document.getElementById('topWa').innerText='WhatsApp: '+d.wa.replace('880','0');
- document.getElementById('heroTitle').innerHTML=d.hTitle;
- document.getElementById('heroSub').innerText=d.hSub;
- document.getElementById('footerTxt').innerText=d.footer;
- if(d.logo){document.getElementById('siteLogo').src=d.logo;document.getElementById('siteLogo').style.display='block';}
- if(d.hImg){document.getElementById('heroImg').src=d.hImg;}
+ const d={shop:localStorage.getItem('as_shop')||'AS. Shop BD',logo:localStorage.getItem('as_logo')||'',wa:localStorage.getItem('as_wa')||'8801407364479',hTitle:localStorage.getItem('as_hTitle')||'Premium Headphones &<br>Phone Back Covers',hSub:localStorage.getItem('as_hSub')||'অরিজিনাল গ্যাজেট সবচেয়ে কম দামে - সারা বাংলাদেশে ক্যাশ অন ডেলিভারি',hImg:localStorage.getItem('as_hImg')||'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',footer:localStorage.getItem('as_footer')||'© 2026 AS. Shop BD | WhatsApp: +8801407364479',products:JSON.parse(localStorage.getItem('as_products')||'null')||products};
+ document.getElementById('siteName').innerHTML=d.shop;document.getElementById('topWa').innerText='WhatsApp: '+d.wa.replace('880','0');document.getElementById('heroTitle').innerHTML=d.hTitle;document.getElementById('heroSub').innerText=d.hSub;document.getElementById('footerTxt').innerText=d.footer;
+ if(d.logo){const el=document.getElementById('siteLogo');el.src=d.logo;el.style.display='block';}
+ if(d.hImg)document.getElementById('heroImg').src=d.hImg;
  const box=document.getElementById('products');box.innerHTML='';
  d.products.forEach(p=>{
-  const msg=`Assalamu Alaikum!%0AAmi order korte chai:%0A%0A*Product:* ${p.name}%0A*Price:* ${p.price} TK%0A*ID:* ${p.id}%0A%0ADelivery address?`;
-  const waLink=`https://wa.me/${d.wa}?text=${msg}`;
+  const msg=`Assalamu Alaikum! Ami order korte chai: ${p.name} Price: ${p.price} TK ID:${p.id}`;
+  const waLink=`https://wa.me/${d.wa}?text=${encodeURIComponent(msg)}`;
   box.innerHTML+=`<div class="card"><img src="${p.img}"><div style="padding:14px"><span class="badge">${p.cat}</span><h3 style="margin:8px 0 4px">${p.name}</h3><p style="margin:0;color:#64748b;font-size:13px">${p.desc}</p><div style="margin-top:8px"><span class="price">৳${p.price}</span><span class="old">৳${p.oldPrice}</span></div><button class="btn-wa" onclick="window.open('${waLink}','_blank')">📲 WhatsApp এ অর্ডার করুন</button></div></div>`;
  });
+ // fill admin inputs
+ document.getElementById('shop').value=localStorage.getItem('as_shop')||'AS. Shop BD';
+ document.getElementById('wa').value=localStorage.getItem('as_wa')||'8801407364479';
+ document.getElementById('hTitle').value=localStorage.getItem('as_hTitle')||'Premium Headphones & Phone Back Covers';
+ document.getElementById('hSub').value=localStorage.getItem('as_hSub')||'অরিজিনাল গ্যাজেট সবচেয়ে কম দামে';
+ document.getElementById('footerIn').value=localStorage.getItem('as_footer')||'© 2026 AS. Shop BD';
+ renderList();
 }
+document.getElementById('logoF').addEventListener('change',e=>{const r=new FileReader();r.onload=ev=>tempLogo=ev.target.result;r.readAsDataURL(e.target.files[0]);});
+document.getElementById('hImgF').addEventListener('change',e=>{const r=new FileReader();r.onload=ev=>tempHero=ev.target.result;r.readAsDataURL(e.target.files[0]);});
+function saveAll(){localStorage.setItem('as_shop',document.getElementById('shop').value);localStorage.setItem('as_wa',document.getElementById('wa').value);localStorage.setItem('as_hTitle',document.getElementById('hTitle').value);localStorage.setItem('as_hSub',document.getElementById('hSub').value);localStorage.setItem('as_footer',document.getElementById('footerIn').value);if(tempLogo)localStorage.setItem('as_logo',tempLogo);if(tempHero)localStorage.setItem('as_hImg',tempHero);alert('✅ Saved!');}
+function renderList(){const l=document.getElementById('list');l.innerHTML='';products=JSON.parse(localStorage.getItem('as_products')||JSON.stringify(products));l.innerHTML='';products.forEach((p,i)=>{l.innerHTML+=`<div class="prod"><img src="${p.img}"><div style="flex:1"><b>${p.name}</b><br><small>৳${p.price}</small></div><button class="b3" onclick="delP(${i})">Del</button></div>`});}
+function addP(){const f=document.getElementById('pImgF').files[0];const save=img=>{let all=JSON.parse(localStorage.getItem('as_products')||JSON.stringify(products));all.push({id:Date.now(),name:document.getElementById('pName').value,price:document.getElementById('pPrice').value,oldPrice:document.getElementById('pOld').value,cat:document.getElementById('pCat').value,desc:document.getElementById('pDesc').value,img:img});localStorage.setItem('as_products',JSON.stringify(all));products=all;renderList();alert('Added');};if(f){const r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(f);}else save('https://images.unsplash.com/photo-1546435770-a3e426bf472b');}
+function delP(i){if(confirm('Delete?')){let all=JSON.parse(localStorage.getItem('as_products')||JSON.stringify(products));all.splice(i,1);localStorage.setItem('as_products',JSON.stringify(all));products=all;renderList();}}
 loadSite();
 </script>
 </body>
